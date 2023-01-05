@@ -8,7 +8,12 @@ namespace TU_Challenge
 {
     public class Pathfinding
     {
-        
+        public string[,] Grid { get; private set; }
+
+        public Pathfinding()
+        {
+
+        }
     }
 
 }

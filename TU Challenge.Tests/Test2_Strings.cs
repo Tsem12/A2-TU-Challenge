@@ -5,6 +5,7 @@ namespace TU_Challenge.Tests
     /// Pour rendre les tests visible, tu dois passer le "#if false" à "#if true" ligne 7
     /// </summary>
 
+    #if true
     public class Test2_Strings
     {
         [Test]
@@ -103,6 +104,9 @@ namespace TU_Challenge.Tests
         /// </summary>
         [TestCase("hello world", 3, "khoor zruog")]
         [TestCase("je suis balaise", 10, "to cesc lkvksco")]
+        [TestCase("je sUiS bAlaIse", 10, "to cEsC lKvkSco")]
+        [TestCase("J'espère que tu est fier de moi Kévin :D", 4, "N'iwtìvi uyi xy iwx jmiv hi qsm Oízmr :H")]
+        [TestCase("N'iwtìvi uyi xy iwx jmiv hi qsm Oízmr :H", 22 ,"J'espère que tu est fier de moi Kévin :D")]
         public void StringToCesarCode(string input, int offset, string expected)
         {
             string result = MyStringImplementation.ToCesarCode(input, offset);
@@ -110,4 +114,5 @@ namespace TU_Challenge.Tests
         }
 
     }
+    #endif
 }

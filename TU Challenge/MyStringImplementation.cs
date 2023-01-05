@@ -52,7 +52,7 @@ namespace TU_Challenge
             
             foreach(char b in a)
             {
-                if(b >= 'A' && b <= 'Z' || b >= 'À' && b <= 'Þ')
+                if(b >= 'A' && b <= 'Z' || b >= 'À' && b <= 'ß')
                 {
                     result += (char) (b + 32);
                 }
@@ -126,12 +126,62 @@ namespace TU_Challenge
 
         public static string UnBazardString(string input)
         {
-            throw new NotImplementedException();
+            string firstHalf = "";
+            string secondHalf = "";
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                if(i >= input.Length / 2)
+                {
+                    secondHalf += input[i];
+                }
+                else
+                {
+                    firstHalf += input[i];
+                }
+            }
+            return MixString(firstHalf, secondHalf);
         }
 
         public static string ToCesarCode(string input, int offset)
         {
-            throw new NotImplementedException();
+            int specialCharacterOffset = 6;
+            string result = "";
+            foreach(char c in input)
+            {
+                if (c >= 'A' && c <= 'z' || c >= 'À' && c <= 'ÿ')
+                {
+                    if(c >= 'à' && c <= 'ÿ' && c + offset + specialCharacterOffset > 'ÿ')
+                    {
+                        int newOffset = (c + offset + specialCharacterOffset) - 'ÿ';
+                        result += (char) ('à' + newOffset - 1);
+                    }
+                    else if(c >= 'À' && c <= 'ß' && c + offset + specialCharacterOffset > 'ß')
+                    {
+                        int newOffset = (c + offset + specialCharacterOffset) - 'ß';
+                        result += (char) ('À' + newOffset - 1);
+                    }
+                    else if (c >= 'a' && c <= 'z' && c + offset > 'z')
+                    {
+                        int newOffset = (c + offset) - 'z';
+                        result += (char)('a' + newOffset - 1);
+                    }
+                    else if (c >= 'A' && c <= 'Z' && c + offset > 'Z')
+                    {
+                        int newOffset = (c + offset) - 'Z';
+                        result += (char)('A' + newOffset - 1);
+                    }
+                    else
+                    {
+                        result += (char) (c + offset);
+                    }
+                }
+                else
+                {
+                    result += c;
+                }
+            }
+            return result;
         }
     }
 }

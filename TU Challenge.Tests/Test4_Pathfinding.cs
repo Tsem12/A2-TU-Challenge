@@ -14,7 +14,7 @@ namespace TU_Challenge.Tests
     /// Ces TU ne représentent que le premier algo : Breadth First Search
     /// Pour rendre les tests visible, tu dois passer le "#if false" à "#if true" ligne 17
     /// </summary>
-#if false
+#if true
     public class Test4_Pathfinding
     {
 #region
