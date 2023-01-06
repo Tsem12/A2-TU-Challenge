@@ -154,10 +154,9 @@ namespace TU_Challenge.Tests
             }
 
             Pathfinding p = new Pathfinding(map);
-            //var path = p.BreadthFirstSearch(start, destination);
+            var path = p.BreadthFirstSearch(start, destination);
 
-            //bool isComplete = path.IsComplete(start, destination);
-            bool isComplete = p.BreadthFirstSearch(start, destination);
+            bool isComplete = path.IsComplete(start, destination);
             Assert.IsTrue(isComplete == pathFound);
 
             if (isComplete)

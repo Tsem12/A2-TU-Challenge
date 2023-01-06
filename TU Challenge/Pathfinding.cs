@@ -116,55 +116,50 @@ namespace TU_Challenge
             return result;
         }
 
-        public bool BreadthFirstSearch(Vector2 start, Vector2 destination)
+        public Path BreadthFirstSearch(Vector2 start, Vector2 destination)
         {
             Queue<Vector2> frontier = new Queue<Vector2>();
+        //const string _map1 = "_____\n" +
+    //                         "__X__\n" +
+    //                         "_____";
             Dictionary<Vector2, Vector2> cameFrom = new Dictionary<Vector2, Vector2>();
             frontier.Enqueue(start);
             cameFrom[start] = start;
 
             while (frontier.Count != 0)
             {
-                Vector2 current = frontier.Peek();
-                for (int i = 0; i < GetNeighboors(current); i++)
+                Vector2 current = frontier.Dequeue();
+                int currentNeigbour = GetNeighboors(current);
+
+                for (int i = 0; i < currentNeigbour; i++)
                 {
-                    if (!cameFrom.ContainsKey(neighboors[0]))
+                    if (!cameFrom.ContainsValue(neighboors[0]))
                     {
                         frontier.Enqueue(neighboors[0]);
                         cameFrom[neighboors[0]] = current;
                         neighboors.RemoveAt(0);
                     }
-                    if(frontier.Count == 0)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        frontier.Dequeue();
-                    }
                 }
             }
 
-            if (cameFrom.ContainsKey(destination) || cameFrom.ContainsValue(destination))
-            {
-                CompletePath = ReconstructPath(cameFrom, start, destination);
-                return true;
-            }
-            return false;
-        }
+            Vector2 currentCursor = destination;
+            Path path = new Path(currentCursor);
 
-        public List<Vector2> ReconstructPath(Dictionary<Vector2, Vector2> breadthResult, Vector2 start, Vector2 destination)
-        {
-            Vector2 current = destination;
-            List<Vector2> path = new List<Vector2>();
-
-            while (current != start)
+            if (cameFrom.ContainsKey(start) || cameFrom.ContainsValue(start))
             {
-                path.Add(current);
-                current = breadthResult[current];
+                while (currentCursor != start)
+                {
+                    path = new Path(path, cameFrom[currentCursor]);
+                    currentCursor = path.LastElement;
+                }
+                path = new Path(path, start);
+                path._path.Reverse();
             }
+
             return path;
+
         }
+
 
         public char GetCoord(Vector2 el)
         {
@@ -173,9 +168,6 @@ namespace TU_Challenge
 
 
 
-        //const string _map1 = "_____\n" +
-    //                         "__X__\n" +
-    //                         "_____";
 
         //const string _map2 = "_____\n" +
         //                     "__X__\n" +

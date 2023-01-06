@@ -8,7 +8,7 @@ namespace TU_Challenge
 {
     public struct Path
     {
-        List<Vector2> _path;
+        public List<Vector2> _path;
 
         public Path(Vector2 start)
         {
