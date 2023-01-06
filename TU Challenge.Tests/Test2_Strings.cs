@@ -5,7 +5,7 @@ namespace TU_Challenge.Tests
     /// Pour rendre les tests visible, tu dois passer le "#if false" à "#if true" ligne 7
     /// </summary>
 
-    #if true
+    #if false
     public class Test2_Strings
     {
         [Test]

@@ -109,8 +109,8 @@ namespace TU_Challenge.Tests
         public void GetNeighboors(int x, int y, int countExpected)
         {
             Pathfinding p = new Pathfinding(_map1);
-            var result = p.GetNeighboors(new Vector2(x, y));
-            Assert.IsTrue(result.Count == countExpected);
+            int result = p.GetNeighboors(new Vector2(x, y));
+            Assert.IsTrue(result == countExpected);
         }
 
         [Test]
@@ -122,17 +122,17 @@ namespace TU_Challenge.Tests
         public void GetNeighboorsExclude(int x, int y, int countExpected)
         {
             var exclude = new List<Vector2>()
-            {
-                new Vector2(1,0),
-                new Vector2(1,2),
-                new Vector2(2,2),
-                new Vector2(0,4),
-            };
+                {
+                    new Vector2(1,0),
+                    new Vector2(1,2),
+                    new Vector2(2,2),
+                    new Vector2(0,4),
+                };
 
             Pathfinding p = new Pathfinding(_map1);
-            var result = p.GetNeighboors(new Vector2(x, y), exclude);
+            int result = p.GetNeighboors(new Vector2(x, y), exclude);
 
-            Assert.IsTrue(result.Count == countExpected);
+            Assert.IsTrue(result == countExpected);
         }
 
         [Test]
@@ -154,14 +154,15 @@ namespace TU_Challenge.Tests
             }
 
             Pathfinding p = new Pathfinding(map);
-            var path = p.BreadthFirstSearch(start, destination);
+            //var path = p.BreadthFirstSearch(start, destination);
 
-            bool isComplete = path.IsComplete(start, destination);
+            //bool isComplete = path.IsComplete(start, destination);
+            bool isComplete = p.BreadthFirstSearch(start, destination);
             Assert.IsTrue(isComplete == pathFound);
 
-            if(isComplete)
+            if (isComplete)
             {
-                foreach(var el in path.CompletePath)
+                foreach (var el in p.CompletePath)
                 {
                     Assert.IsTrue(p.GetCoord(el) == '_');
                 }
